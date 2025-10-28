@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      function orasul() {
+        const select = document.querySelector("#orase");
+        const val = select.options[select.selectedIndex].text;
+        document.querySelector('#res')="Ai ales orașul: " + val;
+      }
+    </script>
+  </head>
+  <body>
+    <select id="orase">
+      <option value="b">Bucuresti</option>
+      <option value="cj">Cluj</option>
+      <option value="is">Iasi</option>
+      <option value="ct">Constanta</option>
+      <option value="gl">Galati</option>
+      <option value="ms">Targu Mures</option>
+    </select>
+    <button onclick="orasul()">Afișează</button>
+    <p id="res"></p>
+  </body>
+</html>
