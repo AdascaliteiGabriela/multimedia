@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Agenda telefonică</title>
+    <style type="text/css">
+      body {
+        font-family: Tahoma;
+        font-size: 11pt;
+        line-height: 1.2em;
+        margin: 0;
+        padding: 12px;
+      }
+
+      h1 {
+        background-color: Navy;
+        color: White;
+        margin: 0;
+        padding: 16px;
+        margin: -12px -12px 20px -12px;
+      }
+
+      table {
+        border: 1px solid Gray;
+        border-collapse: collapse;
+        text-align: left;
+      }
+
+      td,
+      th {
+        padding: 8px 12px;
+        border-bottom: 1px solid Gray;
+      }
+
+      th {
+        background-color: #eeeeee;
+      }
+
+      caption {
+        padding: 8px 12px;
+        border: 1px solid Gray;
+        border-bottom: none;
+        background-color: #e0e0e0;
+        font-weight: bold;
+      }
+
+      tfoot {
+        background-color: #eeeeee;
+        font-weight: bold;
+      }
+
+      form {
+        border: 1px solid Gray;
+        border-radius: 5px;
+        background-color: #eeeeee;
+        padding: 16px;
+      }
+
+      input {
+        font-size: 11pt;
+        height: 18pt;
+      }
+
+      input[type="button"] {
+        font-weight: bold;
+        height: 25pt;
+      }
+
+      @media (min-width: 700px) {
+        body {
+          display: grid;
+          grid-template-columns: 2fr 1fr;
+          column-gap: 3rem;
+          align-items: start;
+        }
+
+        h1 {
+          grid-column-start: 1;
+          grid-column-end: 3;
+        }
+
+        form {
+          display: grid;
+          grid-template-columns: 1fr 2fr;
+          grid-template-rows: 35px 35px 35px 45px;
+        }
+
+        #btnAdauga {
+          grid-column-start: 1;
+          grid-column-end: 3;
+        }
+      }
+
+      @media (max-width: 700px) {
+        body,
+        form {
+          display: flex;
+          flex-direction: column;
+        }
+
+        body > * + *,
+        form > * {
+          margin-top: 8px;
+        }
+
+        #btnAdauga {
+          margin-top: 16px;
+        }
+      }
+    </style>
+
+    <script type="text/javascript">
+      let listaPersoane = [
+        { nume: "Popescu", prenume: "Ion", telefon: "0774329423" },
+
+        { nume: "Vasilescu", prenume: "Maria", telefon: "0734232220" },
+      ];
+      let indexSelectat = -1;
+      function afisare() {
+        const tbody = document.querySelector("#tableBody");
+        tbody.innerHTML = "";
+        console.log(listaPersoane);
+        for (let index = 0; index < listaPersoane.length; index++) {
+          const persoana = listaPersoane[index];
+          const rand = document.createElement("tr");
+          if (index === indexSelectat) rand.classList.add("selectat");
+
+          function adaugaCelula(text) {
+            const celula = document.createElement("td");
+            celula.textContent = text;
+            rand.append(celula);
+            celula.addEventListener("click", () => {
+              indexSelectat = index;
+              afisare();
+            });
+          }
+          adaugaCelula(persoana.nume);
+          adaugaCelula(persoana.prenume);
+          adaugaCelula(persoana.telefon);
+          tbody.append(rand);
+        }
+        document.querySelector(
+          "tfoot td"
+        ).textContent = `Numar persoane: ${listaPersoane.length}`;
+      }
+      const SERVER_URL = "http://ase.softmentor.ro/agenda";
+      async function actualizare() {
+        const raspuns = await fetch(SERVER_URL);
+        listaPersoane = await raspuns.json();
+        afisare();
+      }
+      async function adaugare() {
+        const persoana = {
+          nume: document.querySelector("#nume").value,
+          prenume: document.querySelector("#prenume").value,
+          telefon: document.querySelector("#telefon").value,
+        };
+        let raspuns = await fetch(SERVER_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(persoana),
+        });
+        if (raspuns.ok) actualizare();
+        else alert("Eroare la adaugare");
+      }
+
+      function aplicatie() {
+        actualizare();
+      }
+      document.addEventListener("DOMContentLoaded", aplicatie);
+    </script>
+  </head>
+  <body>
+    <h1>Agenda telefonică</h1>
+    <table>
+      <caption>
+        Lista persoane
+      </caption>
+      <thead>
+        <tr>
+          <th>Nume</th>
+          <th>Prenume</th>
+          <th>Telefon</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <tr>
+          <td>Popescu</td>
+          <td>Ion</td>
+          <td>023423222</td>
+        </tr>
+        <tr>
+          <td>Vasilescu</td>
+          <td>Maria</td>
+          <td>073423222</td>
+        </tr>
+        <tr>
+          <td>Vasilescu</td>
+          <td>Maria</td>
+          <td>073423222</td>
+        </tr>
+        <tr>
+          <td>Vasilescu</td>
+          <td>Maria</td>
+          <td>073423222</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">Număr persoane: 2</td>
+        </tr>
+      </tfoot>
+    </table>
+    <form action="#">
+      <label for="nume">Nume:</label>
+      <input name="nume" id="nume" />
+      <label for="prenume">Prenume:</label>
+      <input name="prenume" id="prenume" />
+      <label for="telefon">Telefon:</label>
+      <input name="telefon" id="telefon" />
+      <input type="button" id="btnAdauga" value="Adaugă" />
+    </form>
+  </body>
+</html>
