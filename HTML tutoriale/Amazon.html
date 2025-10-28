@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shoes</title>
+    <style>
+      .nike {
+        margin-top: 10px;
+        height: 80px;
+        width: 160px;
+      }
+      .price {
+        color: rgb(11, 158, 11);
+      }
+      #delivery {
+        font-size: large;
+      }
+      #button-add-to-cart {
+        height: 30px;
+        width: 100px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-right: 20px;
+        color: black;
+        background-color: rgb(255, 208, 0);
+        border: 0;
+        border-radius: 15px;
+      }
+      #button-add-to-cart:hover {
+        background-color: rgb(226, 186, 8);
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      #button-add-to-cart:active {
+        background-color: rgba(255, 205, 39, 0.795);
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      #button-buy-now {
+        height: 30px;
+        width: 100px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-right: 20px;
+        color: black;
+        background-color: orange;
+        border: 0;
+        border-radius: 15px;
+      }
+      #button-buy-now:hover {
+        background-color: rgb(224, 137, 6);
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      #button-buy-now:active {
+        background-color: rgba(255, 166, 0, 0.6);
+        color: rgba(0, 0, 0, 0.6);
+        cursor: pointer;
+        transition: background-color 0.2s color 0.2s;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <a href="https://www.amazon.com/" target="_blank">Back to Amazon</a>
+    </div>
+    <img class="nike" src="Imagini/nike1.jpeg" alt="Nike shoes" />
+    <h1>Nike Black Running Shoes</h1>
+    <h2 class="price">$39 - in stock.</h2>
+    <p id="delivery">Free delivery tomorrow.</p>
+    <button id="button-add-to-cart">Add to Cart</button>
+    <button id="button-buy-now">Buy now</button>
+  </body>
+</html>

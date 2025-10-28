@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript">
+        function incrementare(e) {
+            let paragraf = document.querySelector("p");
+            let valoare = parseInt(paragraf.innerText);
+            valoare+=e.ctrlKey ? 10 : 1;
+            paragraf.innerText = valoare;
+
+            let paragrafNou = document.createElement("p");
+            paragrafNou.innerText = `Valoarea noua este ${valoare}`;
+            document.body.appendChild(paragrafNou);
+        }
+        function aplicatie() {
+            let buton = document.querySelector("input");
+            buton.addEventListener("click", incrementare);
+        }
+        document.addEventListener("DOMContentLoaded", aplicatie);
+    </script>
+
+<body>
+    <p>
+        1
+
+    </p>
+    <input type="button" value="Incrementare" />
+</body>
+</html>
