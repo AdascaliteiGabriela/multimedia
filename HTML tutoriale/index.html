@@ -126,6 +126,33 @@
         transition: padding-left 1s padding-right 1s padding-top 1s
           padding-bottom 1s;
       }
+      #search-div {
+        margin-top: 20px;
+      }
+      #search {
+        cursor: pointer;
+        font-size: 16px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgb(200, 200, 200);
+        padding-top: 12px;
+        padding-bottom: 12px;
+        padding-left: 15px;
+        padding-right: 15px;
+        border-radius: 8px;
+      }
+      .search-google {
+        cursor: pointer;
+        font-size: 16px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: grey;
+        padding-top: 6px;
+        padding-bottom: 12px;
+        padding-left: 15px;
+        padding-right: 110px;
+        border-radius: 18px;
+      }
     </style>
   </head>
 
@@ -154,8 +181,13 @@
     <div>
       <button class="stretch">Stretch</button>
     </div>
-    <div>
-      <p></p>
+    <div id="search-div">
+      <input type="text" id="search" placeholder="Search" />
+      <input
+        type="text"
+        class="search-google"
+        placeholder="Search Google or type a URL"
+      />
     </div>
   </body>
 </html>
