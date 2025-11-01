@@ -10,7 +10,10 @@
         loses: 0,
         ties: 0,
       };
-
+      function updateScore() {
+        let p = document.querySelector("#paragraph-score");
+        p.innerHTML = `Score: Wins: ${score.wins} Loses: ${score.loses} Ties: ${score.ties}`;
+      }
       let option = 0;
 
       window.onload = function () {
@@ -21,29 +24,36 @@
           else if (pcOption < 2 / 3) pcOption = "paper";
           else pcOption = "scissors";
         }
-
+        updateScore();
         const btnRock = document.querySelector("#rock");
         btnRock.addEventListener("click", () => {
           option = "rock";
           computerChoice();
           if (option == pcOption) {
             ++score.ties;
-            alert(
-              `You both chose ${pcOption}.!!TIE!! \n Score: Wins: ${score.wins} Loses: ${score.loses} Ties: ${score.ties}`
-            );
+
+            document.querySelector("#result").innerHTML = "!!TIE!!";
+            document.querySelector(
+              "#moves"
+            ).innerHTML = `You both chose ${pcOption}`;
           }
           if (pcOption === "scissors") {
             ++score.wins;
-            alert(
-              `You chose rock. Computer chose scissors. You Won. \nScore: Wins: ${score.wins} Loses: ${score.loses} Ties: ${score.ties}`
-            );
+
+            document.querySelector("#result").innerHTML = "You Won.";
+            document.querySelector(
+              "#moves"
+            ).innerHTML = `You chose rock. Computer chose scissors.`;
           }
           if (pcOption === "paper") {
             ++score.loses;
-            alert(
-              `You chose rock. Computer chose paper. You Lost. Score: Wins: ${score.wins} Loses: ${score.loses} Ties: ${score.ties}`
-            );
+
+            document.querySelector("#result").innerHTML = "You Lost.";
+            document.querySelector(
+              "#moves"
+            ).innerHTML = `You chose rock. Computer chose paper.`;
           }
+          updateScore();
         });
 
         const btnPaper = document.querySelector("#paper");
@@ -52,22 +62,29 @@
           computerChoice();
           if (option == pcOption) {
             ++score.ties;
-            alert(
-              `You both chose ${pcOption}.!!TIE!! \nScore: Wins: ${score.wins} Loses: ${score.loses} Ties: ${score.ties}`
-            );
+
+            document.querySelector("#result").innerHTML = "!!TIE!!";
+            document.querySelector(
+              "#moves"
+            ).innerHTML = `You both chose ${pcOption}.`;
           }
           if (pcOption === "scissors") {
             score.loses++;
-            alert(
-              `You chose paper. Computer chose scissors. You Lost. \nScore: Wins: ${score.wins} Loses: ${score.loses} Ties: ${score.ties}`
-            );
+
+            document.querySelector("#result").innerHTML = " You Lost.";
+            document.querySelector(
+              "#moves"
+            ).innerHTML = `You chose paper. Computer chose scissors.`;
           }
           if (pcOption === "rock") {
             score.wins++;
-            alert(
-              `You chose paper. Computer chose rock. You Won. \nScore: Wins: ${score.wins} Loses: ${score.loses} Ties: ${score.ties}`
-            );
+
+            document.querySelector("#result").innerHTML = "You Won.";
+            document.querySelector(
+              "#moves"
+            ).innerHTML = `You chose paper. Computer chose rock.`;
           }
+          updateScore();
         });
 
         const btnScissors = document.querySelector("#scissors");
@@ -76,22 +93,29 @@
           computerChoice();
           if (option == pcOption) {
             score.ties++;
-            alert(
-              `You both chose ${pcOption}.!!TIE!! \nScore: Wins: ${score.wins} Loses: ${score.loses} Ties: ${score.ties}`
-            );
+
+            document.querySelector("#result").innerHTML = "!!TIE!!";
+            document.querySelector(
+              "#moves"
+            ).innerHTML = `You both chose ${pcOption}.`;
           }
           if (pcOption === "paper") {
             score.wins++;
-            alert(
-              `You chose scissors. Computer chose paper. You Won. \nScore: Wins: ${score.wins} Loses: ${score.loses} Ties: ${score.ties}`
-            );
+
+            document.querySelector("#result").innerHTML = "You Won.";
+            document.querySelector(
+              "#moves"
+            ).innerHTML = `You chose scissors. Computer chose paper.`;
           }
           if (pcOption === "rock") {
             score.loses++;
-            alert(
-              `You chose scissors. Computer chose rock. You Lost.\nScore: Wins: ${score.wins} Loses: ${score.loses} Ties: ${score.ties}`
-            );
+
+            document.querySelector("#result").innerHTML = "You Lost.";
+            document.querySelector(
+              "#moves"
+            ).innerHTML = `You chose scissors. Computer chose rock.`;
           }
+          updateScore();
         });
 
         btnReset = document.querySelector("#reset");
@@ -102,6 +126,22 @@
           alert(
             `SCORE WAS RESETED!\nScore: Wins: ${score.wins} Loses: ${score.loses} Ties: ${score.ties}`
           );
+          btnStop.innerHTML = "Don't press this button again";
+          btnStop.style.backgroundColor = "orange";
+          updateScore();
+        });
+        const btnStop = document.querySelector("#stop");
+        btnStop.addEventListener("click", () => {
+          if (btnStop.textContent == "Don't press this button again") {
+            btnStop.innerHTML = "I warned you...";
+            btnStop.style.backgroundColor = "purple";
+          }
+
+          if (btnStop.textContent == "Don't press this button") {
+            btnStop.innerHTML = "NUUUU!!!";
+            btnStop.style.backgroundColor = "darkred";
+          }
+          updateScore();
         });
       };
     </script>
@@ -111,6 +151,10 @@
     <button id="rock">Rock</button>
     <button id="paper">Paper</button>
     <button id="scissors">Scissors</button>
+    <p id="result"></p>
+    <p id="moves"></p>
+    <p id="paragraph-score"></p>
     <button id="reset">Reset</button>
+    <button id="stop">Don't press this button</button>
   </body>
 </html>
