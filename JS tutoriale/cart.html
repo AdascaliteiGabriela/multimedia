@@ -1,31 +1,71 @@
 ﻿<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
+  <head>
     <meta charset="utf-8" />
     <title></title>
     <script>
-        let cartQuantity = 0;
-        window.onload = function () {
-            const btnShow = document.querySelector('#show-quantity'); 
-            const btnAdd = document.querySelector('#add-to-cart'); 
-            const btn2 = document.querySelector('#plus2'); 
-            const btn3 = document.querySelector('#plus3'); 
-            const btnReset = document.querySelector('#reset-cart');
+      let cartQuantity = 0;
+      function calculateTotal() {
+        const inputElement = document.querySelector("#input-cost");
+        let cost = parseFloat(inputElement.value);
+        if (cost < 40) cost += 10;
+        document.querySelector(".js_total_cost").innerHTML = `$ ${cost.toFixed(
+          2
+        )}`;
+      }
+      window.onload = function () {
+        const btnShow = document.querySelector("#show-quantity");
+        const btnAdd = document.querySelector("#add-to-cart");
+        const btn2 = document.querySelector("#plus2");
+        const btn3 = document.querySelector("#plus3");
+        const btnReset = document.querySelector("#reset-cart");
 
-            btnShow.addEventListener("click", () => alert(`Cart: ${cartQuantity}`));
-            btnReset.addEventListener("click", () => cartQuantity = 0);
-            btn2.addEventListener("click", () => { cartQuantity = cartQuantity + 2; alert(`You added two products. Total: ${cartQuantity}`); });
-            btnAdd.addEventListener("click", () => { cartQuantity = cartQuantity + 1; alert(`You added one product. Total: ${cartQuantity}`) });
-            btn3.addEventListener("click", () => { cartQuantity = cartQuantity + 3; alert(`You added three products. Total: ${cartQuantity}`); });
-        }
+        btnShow.addEventListener("click", () => alert(`Cart: ${cartQuantity}`));
+        btnReset.addEventListener("click", () => (cartQuantity = 0));
+        btn2.addEventListener("click", () => {
+          cartQuantity = cartQuantity + 2;
+          alert(`You added two products. Total: ${cartQuantity}`);
+        });
+        btnAdd.addEventListener("click", () => {
+          cartQuantity = cartQuantity + 1;
+          alert(`You added one product. Total: ${cartQuantity}`);
+        });
+        btn3.addEventListener("click", () => {
+          cartQuantity = cartQuantity + 3;
+          alert(`You added three products. Total: ${cartQuantity}`);
+        });
+      };
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <button id="show-quantity">Show quantity</button>
     <button id="add-to-cart">Add to cart</button>
     <button id="plus2">+2</button>
     <button id="plus3">+3</button>
     <button id="reset-cart">Reset cart</button>
-</body>
+    <div>
+      <p>Amazon Shipping Calculator</p>
+      <p></p>
+      <input
+        placeholder="Cost of order"
+        id="input-cost"
+        onkeydown="
+      if(event.key==='Enter'){
+calculateTotal();
+
+      }
+      "
+      />
+      <button
+        id="calculate-cost"
+        onclick="
+      calculateTotal();
+      "
+      >
+        Calculate
+      </button>
+      <p class="js_total_cost"></p>
+    </div>
+  </body>
 </html>
