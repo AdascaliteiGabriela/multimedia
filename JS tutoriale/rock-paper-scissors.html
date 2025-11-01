@@ -4,6 +4,37 @@
   <head>
     <meta charset="utf-8" />
     <title>Rock Paper Scissors</title>
+    <style>
+      body {
+        background-color: pink;
+        color: white;
+        font-family: Arial;
+      }
+      #title {
+        font-size: 30px;
+        font-weight: bold;
+      }
+      .photo {
+        border-radius: 50px;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        display: block;
+      }
+      .game {
+        width: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+        padding: 0;
+        cursor: pointer;
+        width: 100px;
+        height: 100px;
+        aspect-ratio: 1 / 1;
+        box-sizing: border-box;
+        background-color: transparent;
+      }
+    </style>
     <script>
       const score = {
         wins: 0,
@@ -147,10 +178,16 @@
     </script>
   </head>
   <body>
-    <p>Rock Paper Scissors</p>
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissors">Scissors</button>
+    <p id="title">Rock Paper Scissors</p>
+    <button id="rock" class="game">
+      <img src="../HTML tutoriale/Imagini/rock.png" class="photo" />
+    </button>
+    <button id="paper" class="game">
+      <img src="../HTML tutoriale/Imagini/paper2.png " class="photo" />
+    </button>
+    <button id="scissors" class="game">
+      <img src="../HTML tutoriale/Imagini/scissors.png" class="photo" />
+    </button>
     <p id="result"></p>
     <p id="moves"></p>
     <p id="paragraph-score"></p>
