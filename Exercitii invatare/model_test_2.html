@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #btnAfisare {
+        color: orange;
+        border: 2px solid orange;
+        font-family: Tahoma;
+        font-weight: bold;
+      }
+    </style>
+    <script>
+      let temperaturi = [
+        { oras: "București", an: 2020, valoare: 11.2 },
+        { oras: "București", an: 2021, valoare: 11.7 },
+        { oras: "București", an: 2022, valoare: 12.4 },
+        { oras: "Cluj", an: 2020, valoare: 9.5 },
+        { oras: "Cluj", an: 2021, valoare: 9.8 },
+        { oras: "Cluj", an: 2022, valoare: 10.1 },
+        { oras: "Constanța", an: 2020, valoare: 13.0 },
+        { oras: "Constanța", an: 2021, valoare: 13.4 },
+        { oras: "Constanța", an: 2022, valoare: 13.8 },
+      ];
+      function max() {
+        let maxim = temperaturi[0];
+        for (let i = 0; i < temperaturi.length; i++) {
+          if (temperaturi[i].valoare > maxim.valoare) maxim = temperaturi[i];
+        }
+        return maxim;
+      }
+      function afisare(an) {
+        let text = "";
+        for (let i = 0; i < temperaturi.length; i++) {
+          if (temperaturi[i].an === an) {
+            text += `<li>${temperaturi[i].oras} - ${temperaturi[i].valoare} °C</li>`;
+          }
+        }
+        return text;
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        const btnAfisare = document.querySelector("#btnAfisare");
+        const btnMax = document.querySelector("#btnMax");
+        const lista = document.querySelector("#lista");
+        const selectAn = document.querySelector("#selectAn");
+        const result = document.querySelector("#result");
+        btnMax.addEventListener("click", () => {
+          let maxim = max();
+          result.innerHTML = `Cel mai cald oraș în perioada 2020–2022 a fost ${maxim.oras}, cu o temperatură medie de ${maxim.valoare} °C.`;
+        });
+        btnAfisare.addEventListener("click", () => {
+          let an = Number(selectAn.value);
+          result.innerHTML = afisare(an);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <select id="selectAn">
+      <option>2020</option>
+      <option>2021</option>
+      <option>2022</option>
+    </select>
+    <button id="btnAfisare">Afiseaza</button>
+    <button id="btnMax">Cea mai calda</button>
+    <ul id="lista"></ul>
+    <p id="result"></p>
+  </body>
+</html>
